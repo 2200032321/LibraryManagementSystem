@@ -1,22 +1,60 @@
-html {
-  font-size: 14px;
+/* --- Reset & Global --- */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-main);
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+:root {
+    --primary: #181C14;
+    --secondary: #181C14;
+    --accent: #091413;
+    --bg-light: #D3DAD9;
+    --text-muted: #393E46;
+    --text-main: #3C3D37;
+    --text-on-primary: #ffffff;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+/* --- Centering Logic --- */
+/* Using a specific class name to avoid overriding default Bootstrap container behavior */
+/* --- Centering Logic --- */
+.flex-center-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: flex-start; /* Align at the top instead of middle */
+    height: 100vh; /* Forces container to exactly screen height */
+    padding-top: 80px; /* Control the gap from the top here */
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box; /* Ensures padding doesn't add to the height */
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+.lib-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    margin-top: 0; /* Let the container handle the position */
 }
+    .lib-card .btn-primary {
+        background-color: var(--accent) !important; /* #091413 */
+        color: var(--text-on-primary) !important;
+        border: none !important;
+        padding: 12px;
+        width: 100%;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
 
-body {
-  margin-bottom: 60px;
-}
+        /* Hover effect for Option A */
+        .lib-card .btn-primary:hover {
+            background-color: var(--text-muted) !important; /* Transitions to #393E46 */
+            transform: translateY(-2px);
+        }

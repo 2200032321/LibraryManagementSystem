@@ -4,13 +4,12 @@
     ViewData["Title"] = "Login";
 }
 
-<div class="container mt-5">
-    <div class="card p-4">
+<div class="flex-center-container">
+    <div class="lib-card">
 
         <h2>Library Login</h2>
 
         <form asp-action="Login" method="post">
-
             <div class="mb-3">
                 <label>Email</label>
                 <input asp-for="Email" class="form-control" />
@@ -18,26 +17,19 @@
 
             <div class="mb-3">
                 <label>Password</label>
-                <input asp-for="Password"
-                       type="password"
-                       class="form-control" />
+                <input asp-for="Password" type="password" class="form-control" />
             </div>
 
-            <button type="submit"
-                    class="btn btn-primary">
+            <button type="submit" class="btn btn-primary">
                 Login
             </button>
-
         </form>
 
         @if (ViewBag.Error != null)
         {
-            <div class="alert alert-danger">
+            <div class="alert alert-danger mt-3">
                 @Html.Raw(ViewBag.Error)
             </div>
         }
-
-        
-
     </div>
 </div>
