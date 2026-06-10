@@ -1,0 +1,86 @@
+﻿@model WebApp.Models.IssueBookViewModel
+
+@{
+    ViewData["Title"] = "Issue Book";
+}
+
+<h2 class="mb-4">📖 Issue Book</h2>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
+<div class="card shadow">
+    <div class="card-body">
+
+        <form asp-action="Issue" method="post">
+
+            <div class="mb-3">
+                <label asp-for="BookId" class="form-label">
+                    Select Book
+                </label>
+
+                <select asp-for="BookId" class="form-select">
+
+                    <option value="0">
+                        -- Select Book --
+                    </option>
+
+                    @if (Model.Books != null)
+                    {
+                        @foreach (var book in Model.Books)
+                        {
+                            <option value="@book.Id">
+                                @book.Id - @book.Title
+                            </option>
+                        }
+                    }
+
+                </select>
+            </div>
+
+            <div class="mb-3">
+
+                <label asp-for="UserId"
+                       class="form-label">
+                    Select Student
+                </label>
+
+                <select asp-for="UserId"
+                        class="form-select">
+
+                    <option value="0">
+                        -- Select Student --
+                    </option>
+
+                    @if (Model.Users != null)
+                    {
+                        @foreach (var user in Model.Users)
+                        {
+                            <option value="@user.Id">
+                                @user.FullName (@user.Role)
+                            </option>
+                        }
+                    }
+
+                </select>
+
+            </div>
+
+            <button type="submit"
+                    class="btn btn-success">
+                Issue Book
+            </button>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+                Back
+            </a>
+
+        </form>
+
+    </div>
+</div>

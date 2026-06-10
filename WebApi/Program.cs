@@ -96,14 +96,23 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddScoped<IReservationService, ReservationService>();
 
-
-
-// CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowWebApp", policy =>
-        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+    options.AddPolicy("AllowReact",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
 });
+
+// CORS
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowWebApp", policy =>
+//        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+//});
 
 // ═══════════════════════════════════════════════════
 //  2️⃣  BUILD THE APP (services become read-only now)
@@ -128,7 +137,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("AllowWebApp");
+
+
+
+app.UseCors("AllowReact");
+
+
+
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseStaticFiles();

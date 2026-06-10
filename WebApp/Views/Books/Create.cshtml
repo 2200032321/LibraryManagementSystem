@@ -1,0 +1,88 @@
+﻿@model WebApp.Models.BookCreateViewModel
+
+@{
+    ViewData["Title"] = "Add Book";
+}
+
+<h2>Add Book</h2>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+
+    <div class="mb-3">
+        <label>Title</label>
+        <input asp-for="Title" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Author</label>
+        <input asp-for="Author" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>ISBN</label>
+        <input asp-for="ISBN" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Publisher</label>
+        <input asp-for="Publisher" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Category Id</label>
+        <input asp-for="CategoryId" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Total Copies</label>
+        <input asp-for="TotalCopies" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Publish Year</label>
+        <input asp-for="PublishYear" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Description</label>
+        <textarea asp-for="Description"
+                  class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label>Cover Image</label>
+        <input asp-for="CoverImageUrl" type="file" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>EBook File Url</label>
+        <input asp-for="EBookFileUrl"
+               class="form-control" />
+    </div>
+
+    <div class="form-check mb-3">
+        <input asp-for="IsEBook"
+               class="form-check-input" />
+        <label class="form-check-label">
+            Is EBook
+        </label>
+    </div>
+
+    <button type="submit"
+            class="btn btn-success">
+        Save
+    </button>
+
+    <a asp-action="Index"
+       class="btn btn-secondary">
+        Back
+    </a>
+
+</form>

@@ -1,0 +1,79 @@
+﻿@model List<WebApp.Models.UserViewModel>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<h2>Users Management</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th width="300">Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Name</td>
+                <td>@user.Email</td>
+                <td>@user.Role</td>
+                <td>
+                    @(user.IsActive ? "Active" : "Inactive")
+                </td>
+
+                <td>
+
+                    @if (user.IsActive)
+                    {
+                        <form asp-action="Deactivate"
+                              asp-route-id="@user.Id"
+                              method="post"
+                              style="display:inline">
+
+                            <button class="btn btn-warning btn-sm">
+                                Deactivate
+                            </button>
+
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-action="Activate"
+                              asp-route-id="@user.Id"
+                              method="post"
+                              style="display:inline">
+
+                            <button class="btn btn-success btn-sm">
+                                Activate
+                            </button>
+
+                        </form>
+                    }
+
+                    <form asp-action="Delete"
+                          asp-route-id="@user.Id"
+                          method="post"
+                          style="display:inline">
+
+                        <button class="btn btn-danger btn-sm">
+                            Delete
+                        </button>
+
+                    </form>
+
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

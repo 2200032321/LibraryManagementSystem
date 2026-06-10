@@ -1,0 +1,74 @@
+﻿@model WebApp.Models.DashboardViewModel
+
+@{
+    var role = Context.Session.GetString("Role");
+    ViewData["Title"] = role + " Dashboard";
+}
+
+<h2 class="mb-4">📊 @role Dashboard</h2>
+
+<div class="row text-center">
+
+    <div class="col-md-3 mb-3">
+        <div class="card bg-primary text-white shadow p-3">
+            <h5>📚 Books</h5>
+            <h2>@Model.TotalBooks</h2>
+        </div>
+    </div>
+
+    @if (role == "Admin")
+    {
+        <div class="col-md-3 mb-3">
+            <div class="card bg-success text-white shadow p-3">
+                <h5>👥 Users</h5>
+                <h2>@Model.TotalUsers</h2>
+            </div>
+        </div>
+    }
+
+    <div class="col-md-3 mb-3">
+        <div class="card bg-warning text-dark shadow p-3">
+            <h5>🔄 Transactions</h5>
+            <h2>@Model.TotalTransactions</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card bg-danger text-white shadow p-3">
+            <h5>⚠ Overdue</h5>
+            <h2>@Model.OverdueBooks</h2>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card bg-info text-white shadow p-3">
+            <h5>📌 Reservations</h5>
+            <h2>@Model.TotalReservations</h2>
+        </div>
+    </div>
+
+</div>
+
+<hr />
+
+<canvas id="dashboardChart" height="100"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    new Chart(document.getElementById('dashboardChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Books', 'Users', 'Transactions', 'Overdue'],
+            datasets: [{
+                label: 'Stats',
+                data: [
+    @Model.TotalBooks,
+    @Model.TotalUsers,
+    @Model.TotalTransactions,
+    @Model.OverdueBooks
+                ],
+                backgroundColor: ['#0d6efd','#198754','#ffc107','#dc3545']
+            }]
+        }
+    });
+</script>

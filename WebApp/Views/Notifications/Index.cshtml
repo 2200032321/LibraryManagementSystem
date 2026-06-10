@@ -1,0 +1,95 @@
+﻿@model List<WebApp.Models.NotificationViewModel>
+
+@{
+    ViewData["Title"] = "Notifications";
+}
+
+<h2 class="mb-4">
+    🔔 Notifications
+</h2>
+
+<table class="table table-bordered">
+
+    <thead class="table-dark">
+        <tr>
+            <th>Message</th>
+            <th>Status</th>
+            <th width="220">Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @if (Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>@item.Message</td>
+
+                    <td>
+                        @if (item.IsRead)
+                        {
+                            <span class="badge bg-success">
+                                Read
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning text-dark">
+                                Unread
+                            </span>
+                        }
+                    </td>
+
+                    <td>
+
+                        @if (!item.IsRead)
+                        {
+                            <form asp-action="MarkRead"
+                                  method="post"
+                                  class="d-inline">
+
+                                <input type="hidden"
+                                       name="id"
+                                       value="@item.Id" />
+
+                                <button class="btn btn-primary btn-sm">
+                                    Mark Read
+                                </button>
+
+                            </form>
+                        }
+
+                        <form asp-action="Delete"
+                              method="post"
+                              class="d-inline">
+
+                            <input type="hidden"
+                                   name="id"
+                                   value="@item.Id" />
+
+                            <button class="btn btn-danger btn-sm">
+                                Delete
+                            </button>
+
+                        </form>
+
+                    </td>
+
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3" class="text-center">
+                    No Notifications
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>

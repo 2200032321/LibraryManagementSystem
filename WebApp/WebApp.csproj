@@ -17,4 +17,9 @@
     <ProjectReference Include="..\DOL\DOL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Help\" />
+    <Folder Include="Views\Contact\" />
+  </ItemGroup>
+
 </Project>

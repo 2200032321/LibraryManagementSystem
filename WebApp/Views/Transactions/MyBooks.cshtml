@@ -1,0 +1,59 @@
+﻿@model List<WebApp.Models.TransactionViewModel>
+
+@{
+    ViewData["Title"] = "My Books";
+}
+
+<h2 class="mb-4">📚 My Issued Books</h2>
+
+<table class="table table-bordered table-striped">
+
+    <thead class="table-dark">
+        <tr>
+            <th>Transaction Id</th>
+            <th>Book Id</th>
+            <th>Issue Date</th>
+            <th>Due Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>@item.Id</td>
+
+                    <td>@item.BookId</td>
+
+                    <td>
+                        @item.IssueDate.ToString("dd-MM-yyyy")
+                    </td>
+
+                    <td>
+                        @item.DueDate.ToString("dd-MM-yyyy")
+                    </td>
+
+                    <td>
+                        @item.Status
+                    </td>
+
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5" class="text-center">
+                    No Books Issued
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>

@@ -10,7 +10,19 @@ public class UserService : IUserService
     {
         _context = context;
     }
+    public async Task<List<UserReadDto>> GetAllUsersAsync()
+    {
+        var users = await _context.Users.ToListAsync();
 
+        return users.Select(u => new UserReadDto
+        {
+            Id = u.Id,
+            FullName = u.FullName,
+            Email = u.Email,
+            IsActive = u.IsActive,
+            Role = u.Role.ToString()
+        }).ToList();
+    }
     public async Task<List<UserReadDto>> GetAllAsync()
     {
         return await _context.Users

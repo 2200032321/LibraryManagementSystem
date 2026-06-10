@@ -1,0 +1,130 @@
+﻿@model WebApp.Models.BookViewModel
+
+@{
+    ViewData["Title"] = "Book Details";
+}
+
+<h2 class="mb-4">📖 Book Details</h2>
+
+<div class="card shadow">
+
+    <div class="card-body">
+
+        <div class="row">
+
+            <!-- COVER IMAGE -->
+            <div class="col-md-3 text-center">
+
+                @if (!string.IsNullOrWhiteSpace(Model.CoverImageUrl))
+                {
+                    <img src="@Model.CoverImageUrl"
+                         class="img-fluid rounded shadow"
+                         style="max-height:300px;" />
+                }
+                else
+                {
+                    <img src="https://via.placeholder.com/200x300?text=No+Cover"
+                         class="img-fluid rounded shadow" />
+                }
+
+            </div>
+
+            <!-- BOOK DETAILS -->
+            <div class="col-md-9">
+
+                <h3>
+                    @Model.Title
+
+                    @if (Model.IsEBook)
+                    {
+                        <span class="badge bg-info">
+                            E-Book
+                        </span>
+                    }
+                </h3>
+
+                <hr />
+
+                <div class="mb-2">
+                    <strong>Author:</strong>
+                    @Model.Author
+                </div>
+
+                <div class="mb-2">
+                    <strong>ISBN:</strong>
+                    @Model.ISBN
+                </div>
+
+                <div class="mb-2">
+                    <strong>Total Copies:</strong>
+                    @Model.TotalCopies
+                </div>
+
+                <div class="mb-2">
+                    <strong>Available Copies:</strong>
+                    @Model.AvailableCopies
+                </div>
+
+                <div class="mb-2">
+                    <strong>Status:</strong>
+
+                    @if (Model.AvailableCopies > 0)
+                    {
+                        <span class="badge bg-success">
+                            Available
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">
+                            Out of Stock
+                        </span>
+                    }
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(Model.Description))
+                {
+                    <hr />
+
+                    <h5>Description</h5>
+
+                    <p>
+                        @Model.Description
+                    </p>
+                }
+
+                <!-- EBOOK ACTIONS -->
+                @if (Model.IsEBook &&
+                !string.IsNullOrWhiteSpace(Model.EBookFileUrl))
+                {
+                    <hr />
+
+                    <h5>📚 E-Book Options</h5>
+
+                    <a href="@Model.EBookFileUrl"
+                       target="_blank"
+                       class="btn btn-success">
+                        Read Online
+                    </a>
+
+                    <a href="@Model.EBookFileUrl"
+                       download
+                       class="btn btn-primary">
+                        Download
+                    </a>
+                }
+
+                <hr />
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+                    Back to Books
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

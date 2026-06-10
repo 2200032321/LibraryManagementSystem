@@ -1,0 +1,40 @@
+﻿@model WebApp.Models.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Student Dashboard";
+}
+
+<h2 class="mb-4">🎓 Student Dashboard</h2>
+
+<div class="row text-center">
+
+    <div class="col-md-4 mb-3">
+        <div class="card bg-primary text-white shadow p-3">
+            <h5>📚 Available Books</h5>
+            <h2>@Model.TotalBooks</h2>
+        </div>
+    </div>
+
+</div>
+
+<hr />
+
+<div class="d-flex gap-2">
+    <a asp-controller="Books"
+       asp-action="Index"
+       class="btn btn-primary">
+        Browse Books
+    </a>
+
+    <a asp-controller="Transactions"
+       asp-action="MyBooks"
+       class="btn btn-success">
+        My Books
+    </a>
+
+    <a asp-controller="Reservations"
+       asp-action="MyReservations"
+       class="btn btn-info">
+        My Reservations
+    </a>
+</div>
